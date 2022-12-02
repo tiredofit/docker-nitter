@@ -30,6 +30,9 @@ This will build a Docker Image for [Nitter] (https://nitter.net), An alternative
   - [Persistent Storage](#persistent-storage)
   - [Environment Variables](#environment-variables)
     - [Base Images used](#base-images-used)
+    - [Container Options](#container-options)
+    - [Nitter Options](#nitter-options)
+    - [Cache Options](#cache-options)
   - [Networking](#networking)
 - [Maintenance](#maintenance)
   - [Shell Access](#shell-access)
@@ -97,8 +100,62 @@ Be sure to view the following repositories to understand all the customizable op
 | ------------------------------------------------------ | -------------------------------------- |
 | [OS Base](https://github.com/tiredofit/docker-alpine/) | Customized Image based on Alpine Linux |
 
-### Networking
 
+#### Container Options
+
+| Name           | Description                               | Default       |
+| -------------- | ----------------------------------------- | ------------- |
+| `CONFIG_FILE`  | Config file name (if `SETUP_MODE=MANUAL`) | `nitter.conf` |
+| `CONFIG_PATH`  | Config file name (if `SETUP_MODE=MANUAL`) | `/config/`    |
+| `ENABLE_NGINX` | Use NGINX as a proxy to Nitter            | `FALSE`       |
+| `LISTEN_PORT`  | Default Listen Port                       | `8080`        |
+| `SETUP_MODE`   | `AUTO` or `MANUAL` configuration          | `AUTO`        |
+
+#### Nitter Options
+
+| Name                          | Description                                       | Default               |
+| ----------------------------- | ------------------------------------------------- | --------------------- |
+| `APP_DEBUG`                   | Enable Application Debug Mode                     | `FALSE`               |
+| `APP_SECRET`                  | HMAC Key                                          | random                |
+| `DEFAULT_THEME`               | Default Theme                                     | `Nitter`              |
+| `DEFAULT_AUTOPLAY_GIF`        | Autoplay GIFs                                     | `TRUE`                |
+| `DEFAULT_BIDIRECTIONAL_TEXT`  | Enable BiDirectional Text                         | `FALSE`               |
+| `DEFAULT_DEFAULT_MUTE_VIDEOS` | Mute Videos                                       | `FALSE`               |
+| `DEFAULT_HIDE_BANNER`         | Hide Profile Banner                               | `FALSE`               |
+| `DEFAULT_HIDE_PINS`           | Hide Pinned Tweets                                | `FALSE`               |
+| `DEFAULT_HIDE_REPLIES`        | Hide Replies                                      | `FALSE`               |
+| `DEFAULT_HIDE_TWEET_STATS`    | Hide Stats                                        | `FALSE`               |
+| `DEFAULT_HLS_PLAYBACK`        | Media Playback                                    | `FALSE`               |
+| `DEFAULT_INFINITE_SCROLL`     | Infinite Scrolling                                | `FALSE`               |
+| `DEFAULT_MP4_PLAYBACK`        | Use MP4 for Playback                              | `FALSE`               |
+| `DEFAULT_PROXY_VIDEOS`        | Proxy Videos                                      | `TRUE`                |
+| `DEFAULT_SQUARE_AVATARS`      | Use Square Avatars                                | `FALSE`               |
+| `DEFAULT_STICKY_PROFILE`      | Make profile header Sticky                        | `FALSE`               |
+| `ENABLE_HTTPS`                | Enable HTTPS Cookie Mode                          | `TRUE`                |
+| `ENABLE_RSS`                  | Enable RSS Feeds                                  | `FALSE`               |
+| `HTTP_MAX_CONNECTIONS`        | Maximum amount of connections                     | `100`                 |
+| `LISTEN_PORT`                 | Listen Port                                       | `8080`                |
+| `PROXY_URL`                   | If using a upstream proxy enter here              | ``                    |
+| `PROXY_AUTH`                  | If using a upstream proxy enter auth details here | ``                    |
+| `SITE_HOSTNAME`               | Sites Hostname                                    | `nitter.net`          |
+| `SITE_TITLE`                  | Title in Browser                                  | `Tiredof I.T! Nitter` |
+| `STATIC_PATH`                 | Path for Static Assets                            | `/app/public/`        |
+| `TOKEN_COUNT_MINIMUM`         | API Counts                                        | `10`                  |
+| `URL_USE_BASE64`              | Should media utilize Base64 encoding              | `FALSE`               |
+
+#### Cache Options
+
+| Name                    | Description                              | Default |
+| ----------------------- | ---------------------------------------- | ------- |
+| `CACHE_LIST`            | How long to cache lists info (keep high) | `240`   |
+| `CACHE_RSS`             | Hoe long to cache RSS Feeds              | `10`    |
+| `REDIS_CONNECTION_MAX`  | Maximum Connections to Redis             | `30`    |
+| `REDIS_CONNECTION_POOL` | Connection Pools                         | `20`    |
+| `REDIS_PORT`            | Redis Port                               | `6379`  |
+| `REDIS_HOST`            | Redis Hostname                           | ``      |
+| `REDIS_PASS`            | Redis Password                           | ``      |
+
+### Networking
 
 | Port | Protocol | Description        |
 | ---- | -------- | ------------------ |

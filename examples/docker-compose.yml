@@ -15,6 +15,7 @@ services:
       - TIMEZONE=America/Vancouver
       - CONTAINER_NAME=nitter-app
       - SETUP_TYPE=AUTO
+      - ENABLE_NGINX=FALSE
 
       - REDIS_HOST=nitter-db-redis
     networks:

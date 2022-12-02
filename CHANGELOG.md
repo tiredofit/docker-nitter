@@ -1,3 +1,10 @@
+## 1.0.1 2022-12-02 <dave at tiredofit dot ca>
+
+   ### Added
+      - Setup Nginx proxying functionality
+      - Add documentation
+
+
 ## 1.0.0 2022-12-02 <dave at tiredofit dot ca>
 
    ### Added
