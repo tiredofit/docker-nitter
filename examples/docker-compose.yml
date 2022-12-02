@@ -1,0 +1,42 @@
+version: '3.7'
+services:
+
+  nitter-app:
+    image: tiredofit/nitter:latest
+    container_name: nitter-app
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.nitter.rule=Host(`nitter.example.com`)
+      - traefik.http.services.nitter.loadbalancer.server.port=8080
+    #volumes:
+      #- ./config:/config # Only if you want to use your own
+      #- ./logs:/www/logs # Only if using Nginx as a proxy
+    environment:
+      - TIMEZONE=America/Vancouver
+      - CONTAINER_NAME=nitter-app
+      - SETUP_TYPE=AUTO
+
+      - REDIS_HOST=nitter-db-redis
+    networks:
+      - proxy
+      - services
+    restart: always
+
+  nitter-db-redis:
+    image: tiredofit/redis
+    container_name: nitter-db-redis
+    volumes:
+      - ./db/redis:/data
+    environment:
+      - TIMEZONE=America/Vancouver
+      - CONTAINER_NAME=nitter-db-redis
+    networks:
+      - services
+    restart: always
+
+
+networks:
+  proxy:
+    external: true
+  services:
+    external: true

@@ -1,0 +1,78 @@
+#!/command/with-contenv bash
+
+
+bootstrap_filesystem(){
+    mkdir -p "${CONFIG_PATH}"
+    chown nitter:nitter "${CONFIG_PATH}"
+    ln -sf "${CONFIG_PATH}"/"${CONFIG_FILE}" /app/nitter.conf
+
+    if [ -d "${STATIC_PATH}" ]; then
+        mkdir -p "${STATIC_PATH}"
+        chown nitter:nitter "${STATIC_PATH}"
+    fi
+}
+
+generate_configuration(){
+    if [ "${SETUP_MODE,,}" = "auto" ] || [ ! -f "${CONFIG_PATH}"/"${CONFIG_FILE}" ]; then
+        print_debug "Automatically generating configuration based on environment variables and defaults"
+        if [ -z "${APP_SECRET}" ] ; then
+            print_warn "No APP_SECRET environment variable defined - Randomly generating one"
+            APP_SECRET=$(cat /dev/urandom | tr -dc 'a-z0-9' | fold -w 32 | head -n 1)
+        fi
+        cat <<EOF | silent sudo -u nitter tee "${CONFIG_PATH}"/"${CONFIG_FILE}"
+## tiredofit/nitter Nitter Configuration
+## If you want to use your own configuration files set SETUP_TYPE=MANUAL when starting container
+## Last Generated on $(TZ=${TIMEZONE} date +'%Y-%m-%d %H:%M:%S %Z')
+
+[Server]
+address = "0.0.0.0"
+port = ${LISTEN_PORT}
+https = ${ENABLE_HTTPS}
+httpMaxConnections = ${HTTP_MAX_CONNECTIONS}
+staticDir = "${STATIC_PATH}"
+title = "${SITE_TITLE}"
+hostname = "${SITE_HOSTNAME}"
+
+[Cache]
+listMinutes = ${CACHE_LIST}
+rssMinutes = ${CACHE_RSS}
+redisHost = "${REDIS_HOST}"
+redisPort = ${REDIS_PORT}
+redisPassword = "${REDIS_PASS}"
+redisConnections = ${REDIS_CONNECTION_POOL}
+redisMaxConnections = ${REDIS_CONNECTION_MAX}
+
+[Config]
+hmacKey = "${APP_SECRET}"
+base64Media = ${URL_USE_BASE64,,}
+enableRSS = ${ENABLE_RSS,,}
+enableDebug = ${APP_DEBUG,,}
+proxy = "${PROXY_URL}"
+proxyAuth = "${PROXY_AUTH}"
+tokenCount = ${TOKEN_COUNT_MINIMUM}
+
+[Preferences]
+autoplayGIfs = ${DEFAULT_AUTOPLAY_GIF,,}
+bidiSupport = ${DEFAULT_BIDIRECTIONAL_TEXT,,}
+hideBanner = ${DEFAULT_HIDE_BANNER,,}
+hidePins = ${DEFAULT_HIDE_PINS,,}
+hideReplies = ${DEFAULT_HIDE_REPLIES,,}
+hideTweetStats = ${DEFAULT_HIDE_TWEET_STATS,,}
+hlsPlayback = ${DEFAULT_HLS_PLAYBACK,,}
+infiniteScroll = ${DEFAULT_INFINITE_SCROLL,,}
+mp4Playback = ${DEFAULT_MP4_PLAYBACK,,}
+muteVideos = ${DEFAULT_DEFAULT_MUTE_VIDEOS,,}
+proxyVideos = ${DEFAULT_PROXY_VIDEOS,,}
+replaceInstagram = "${DEFAULT_URL_REPLACE_INSTAGRAM}"
+replaceReddit = "${DEFAULT_URL_REPLACE_REDDIT}"
+replaceTwitter = "${DEFAULT_URL_REPLACE_TWITTER}"
+replaceYouTube = "${DEFAULT_URL_REPLACE_YOUTUBE}"
+squareAvatars = ${DEFAULT_SQUARE_AVATARS,,}
+stickyProfile = ${DEFAULT_STICKY_PROFILE,,}
+theme = "${DEFAULT_THEME}"
+EOF
+    else
+        print_debug "Manual mode detected - Using '${CONFIG_PATH}/${CONFIG_FILE}' for configuration"
+    fi
+
+}

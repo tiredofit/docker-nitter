@@ -1,0 +1,14 @@
+#!/command/with-contenv bash
+
+source /assets/functions/00-container
+prepare_service
+PROCESS_NAME="nitter"
+
+liftoff
+
+sanity_db redis
+db_ready redis
+bootstrap_filesystem
+generate_configuration
+
+liftoff

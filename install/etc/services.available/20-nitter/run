@@ -1,0 +1,14 @@
+#!/command/with-contenv bash
+
+source /assets/functions/00-container
+PROCESS_NAME="nitter"
+prepare_service defaults single
+
+check_container_initialized
+check_service_initialized init
+
+liftoff
+
+print_start "Starting nitter build '${NITTER_VERSION}'"
+cd /app
+silent exec s6-setuidgid nitter ./nitter
