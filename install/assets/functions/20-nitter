@@ -6,7 +6,7 @@ bootstrap_filesystem(){
     chown nitter:nitter "${CONFIG_PATH}"
     ln -sf "${CONFIG_PATH}"/"${CONFIG_FILE}" /app/nitter.conf
 
-    if [ -d "${STATIC_PATH}" ]; then
+    if [ ! -d "${STATIC_PATH}" ]; then
         mkdir -p "${STATIC_PATH}"
         chown nitter:nitter "${STATIC_PATH}"
     fi
