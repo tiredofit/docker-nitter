@@ -1,7 +1,7 @@
 # github.com/tiredofit/nitter
 
 [![GitHub release](https://img.shields.io/github/v/tag/tiredofit/nitter?style=flat-square)](https://github.com/tiredofit/nitter/releases/latest)
-[![Build Status](https://img.shields.io/github/workflow/status/tiredofit/nitter/build?style=flat-square)](https://github.com/tiredofit/nitter/actions?query=workflow%3Abuild)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/tiredofit/docker-nitter/main.yml?branch=main&style=flat-square)](https://github.com/tiredofit/docker-nitter/actions)
 [![Docker Stars](https://img.shields.io/docker/stars/tiredofit/rspamd.svg?style=flat-square&logo=docker)](https://hub.docker.com/r/tiredofit/nitter/)
 [![Docker Pulls](https://img.shields.io/docker/pulls/tiredofit/rspamd.svg?style=flat-square&logo=docker)](https://hub.docker.com/r/tiredofit/nitter/)
 [![Become a sponsor](https://img.shields.io/badge/sponsor-tiredofit-181717.svg?logo=github&style=flat-square)](https://github.com/sponsors/tiredofit)
