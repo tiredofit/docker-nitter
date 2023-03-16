@@ -6,7 +6,7 @@ LABEL maintainer="Dave Conroy (github.com/tiredofit)"
 
 ARG NITTER_VERSION
 
-ENV NITTER_VERSION=${NITTER_VERSION:-"d923c20aa6a87224343562f15b00e72e7780aa3d"} \
+ENV NITTER_VERSION=${NITTER_VERSION:-"bc219aa792cc0e4117888b2036a969559f4f2689"} \
     NITTER_REPO_URL=https://github.com/zedeus/nitter \
     ENABLE_NGINX=FALSE \
     NGINX_ENABLE_CREATE_SAMPLE_HTML=FALSE \
@@ -45,7 +45,7 @@ RUN source assets/functions/00-container && \
     \
     clone_git_repo "${NITTER_REPO_URL}" "${NITTER_VERSION}" && \
     set +e && \
-    if [ -d "/build-assets/src" ] ; then cp -Rp /build-assets/src/container/* /usr/src/nitter/ ; fi; \
+    if [ -d "/build-assets/src" ] ; then cp -Rp /build-assets/src/* /usr/src/nitter/ ; fi; \
     if [ -d "/build-assets/scripts" ] ; then for script in /build-assets/scripts/*.sh; do echo "** Applying $script"; bash $script; done && \ ; fi ; \
     set -e && \
     nimble install -y --depsOnly && \

@@ -1,3 +1,12 @@
+## 1.0.3 2023-03-16 <dave at tiredofit dot ca>
+
+   ### Added
+      - Nitter commit bc219aa792cc0e4117888b2036a969559f4f2689
+
+   ### Changed
+      - Fix build-assets src override function in Dockerfile
+
+
 ## 1.0.2 2022-12-02 <dave at tiredofit dot ca>
 
    ### Changed
