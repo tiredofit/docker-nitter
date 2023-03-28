@@ -1,3 +1,9 @@
+## 1.0.4 2023-03-28 <dave at tiredofit dot ca>
+
+   ### Added
+      - Nitter Commit 78cb405acd192ee9391c2739f9edeab49c3ce797
+
+
 ## 1.0.3 2023-03-16 <dave at tiredofit dot ca>
 
    ### Added
