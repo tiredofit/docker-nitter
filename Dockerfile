@@ -6,7 +6,7 @@ LABEL maintainer="Dave Conroy (github.com/tiredofit)"
 
 ARG NITTER_VERSION
 
-ENV NITTER_VERSION=${NITTER_VERSION:-"78cb405acd192ee9391c2739f9edeab49c3ce797"} \
+ENV NITTER_VERSION=${NITTER_VERSION:-"0bc3c153d9b38a3c02f321fb64a375fef6b97e8e"} \
     NITTER_REPO_URL=https://github.com/zedeus/nitter \
     ENABLE_NGINX=FALSE \
     NGINX_ENABLE_CREATE_SAMPLE_HTML=FALSE \

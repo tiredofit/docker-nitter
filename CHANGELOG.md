@@ -1,3 +1,9 @@
+## 1.0.6 2023-07-10 <dave at tiredofit dot ca>
+
+   ### Added
+      - Nitter 0bc3c153d9b38a3c02f321fb64a375fef6b97e8e
+
+
 ## 1.0.5 2023-05-10 <dave at tiredofit dot ca>
 
    ### Changed
