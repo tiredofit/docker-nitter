@@ -1,5 +1,5 @@
 ARG DISTRO=alpine
-ARG DISTRO_VERSION=3.18
+ARG DISTRO_VERSION=3.19
 
 FROM docker.io/tiredofit/nginx:${DISTRO}-${DISTRO_VERSION}
 LABEL maintainer="Dave Conroy (github.com/tiredofit)"
